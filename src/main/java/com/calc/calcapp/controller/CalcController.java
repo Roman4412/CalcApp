@@ -1,6 +1,7 @@
 package com.calc.calcapp.controller;
 
 import com.calc.calcapp.calcInterface.ServiceInterface;
+import com.calc.calcapp.service.CalcService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,52 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/calculator")
 public class CalcController {
-    ServiceInterface serviceInterface = new ServiceInterface() {
-        @Override
+    ServiceInterface serviceInterface = new CalcService();
+        @GetMapping()
         public String toGreet() {
-            return null;
+            return serviceInterface.toGreet();
         }
 
-        @Override
-        public String plus(Integer num1, Integer num2) {
-            return null;
+        @GetMapping("/plus")
+        public String plus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+            return serviceInterface.plus(num1, num2);
         }
 
-        @Override
-        public String minus(Integer num1, Integer num2) {
-            return null;
+        @GetMapping("/minus")
+        public String minus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+            return serviceInterface.minus(num1, num2);
+
         }
 
-        @Override
-        public String multiply(Integer num1, Integer num2) {
-            return null;
+        @GetMapping("/multiply")
+        public String multiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+            return serviceInterface.multiply(num1, num2);
         }
 
-        @Override
-        public String divide(Integer num1, Integer num2) {
-            return null;
+        @GetMapping("/divide")
+        public String divide(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+            return serviceInterface.divide(num1, num2);
         }
-    };
-    @GetMapping()
-    public String toGreet() {
-        return serviceInterface.toGreet();
-    }
-
-    @GetMapping("/plus")
-    public String plus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2 ) {
-        return serviceInterface.plus(num1, num2);
-    }
-    @GetMapping("/minus")
-    public String minus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2 ) {
-        return serviceInterface.minus(num1, num2);
-
-    }
-    @GetMapping("/multiply")
-    public String multiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2 ) {
-        return serviceInterface.multiply(num1, num2);
-    }
-    @GetMapping("/divide")
-    public String divide(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2 ) {
-        return serviceInterface.divide(num1, num2);
-    }
 }
